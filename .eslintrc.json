@@ -4,8 +4,9 @@
 
     "plugin:@typescript-eslint/recommended",
 
-    // Uses the recommended rules from @eslint-plugin-react
+    // Uses the recommended rules from @eslint-plugin-react and @eslint-plugin-react-hooks
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
 
     // Enables eslint-plugin-prettier and eslint-config-prettier.
     // Also disables ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier.
