@@ -14,7 +14,7 @@ export default function CommandCard({
   const capitalize = (string = "") => [...string].map((char, index) => (index ? char : char.toUpperCase())).join("")
 
   return (
-    <Grid item sx={{ minWidth: "420px", maxWidth: "420px" }}>
+    <Grid item xs={6}>
       <Card>
         <CardContent>
           <Box display="flex" alignItems="top">

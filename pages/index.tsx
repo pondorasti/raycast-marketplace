@@ -20,7 +20,7 @@ export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof 
 
   function commandsFactory(scriptCommands: Command[]): JSX.Element {
     return (
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         {scriptCommands.map((command: Command) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
           <CommandCard key={command.title} {...command} />
@@ -31,13 +31,13 @@ export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof 
 
   function groupsFactory(groups: CommandsGroup[], isSubGroup = false) {
     return groups.map((group: CommandsGroup) => (
-      <div key={group.name}>
+      <Box key={group.name}>
         <Typography key={group.name} variant={isSubGroup ? "h6" : "h5"}>
           {group.name}
         </Typography>
         {group.scriptCommands.length !== 0 && commandsFactory(group.scriptCommands)}
         {group.subGroups && groupsFactory(group.subGroups, true)}
-      </div>
+      </Box>
     ))
   }
 
@@ -50,9 +50,13 @@ export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof 
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main>
-          <h1>hello</h1>
-          <Box display="flex" flexDirection="column">
-            {groupsFactory(commandsGroups)}
+          <Box padding="64px">
+            <Typography variant="h3" textAlign="center">
+              Unofficial Marketplace <br /> for Raycast Script Commands
+            </Typography>
+            <Box display="flex" flexDirection="column">
+              {groupsFactory(commandsGroups)}
+            </Box>
           </Box>
         </main>
       </ThemeProvider>
@@ -65,6 +69,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const result = await fetch(api)
   const data = await result.json()
   const commandsGroups: CommandsGroup[] = data.groups
+  commandsGroups.sort((a, b) => (a.name > b.name ? 1 : -1))
 
   return {
     props: { commandsGroups },
