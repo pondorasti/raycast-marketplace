@@ -1,4 +1,4 @@
-import { Card, Typography, Box, CardContent, Link, Grid } from "@material-ui/core"
+import { Card, Typography, Box, CardContent, Link, Grid, CardActionArea } from "@material-ui/core"
 import Command from "./types"
 
 export default function CommandCard({
@@ -15,8 +15,8 @@ export default function CommandCard({
 
   return (
     <Grid item xs={6}>
-      <Card>
-        <CardContent>
+      <Card sx={{ height: "100%" }}>
+        <CardActionArea>
           <Box display="flex" alignItems="top">
             <img
               src="https://raw.githubusercontent.com/raycast/script-commands/master/commands/dashboard/images/speedtest-logo.png"
@@ -47,7 +47,7 @@ export default function CommandCard({
               </Link>
             </Typography>
           </Box>
-        </CardContent>
+        </CardActionArea>
       </Card>
     </Grid>
   )
