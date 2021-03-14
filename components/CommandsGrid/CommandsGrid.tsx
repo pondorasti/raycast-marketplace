@@ -67,7 +67,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
   const sidebarWidth = "200px"
   const [searchQuery, setSearchQuery] = useState("")
   const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value)
+    // setSearchQuery(event.target.value)
   }
 
   return (
