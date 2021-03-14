@@ -54,6 +54,15 @@ const RayTheme = createMuiTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 12,
+          },
+        },
+      },
+    },
   },
 })
 

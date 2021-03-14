@@ -2,7 +2,7 @@ import Head from "next/head"
 import dynamic from "next/dynamic"
 import { GetStaticProps, InferGetStaticPropsType } from "next"
 import CssBaseline from "@material-ui/core/CssBaseline"
-import { StylesProvider, Box, Typography } from "@material-ui/core/"
+import { StylesProvider, Box, Typography, TextField } from "@material-ui/core/"
 import { ThemeProvider } from "@material-ui/core/styles"
 
 import RayTheme from "../components/RayTheme"
@@ -24,9 +24,20 @@ export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof 
         </Head>
         <main>
           <Box padding="64px">
-            <Typography variant="h3" textAlign="center" paddingBottom={8}>
+            <Typography variant="h3" textAlign="center" paddingBottom={4}>
               Unofficial Marketplace <br /> for Raycast Script Commands
             </Typography>
+            <Box
+              position="sticky"
+              top="0"
+              paddingTop={4}
+              paddingBottom={4}
+              zIndex={10}
+              width="100%"
+              bgcolor="background.default"
+            >
+              <TextField label="Search" fullWidth />
+            </Box>
             <CommandsGrid commandsGroups={commandsGroups} />
           </Box>
         </main>

@@ -37,7 +37,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
           key={group.name}
           variant={isSubGroup ? "h6" : "h5"}
           position="sticky"
-          top="0"
+          top="120px"
           zIndex={1}
           bgcolor="background.default"
         >
