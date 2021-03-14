@@ -1,7 +1,5 @@
 import Link from "next/link"
 import { Tab, Tabs, Box, Typography, Grid } from "@material-ui/core"
-// import { findIndex } from "lodash"
-// import useScrollSpy from "../../utils/useScrollSpy"
 import CommandsGroup from "./types"
 import { Command, CommandCard } from "../CommandCard"
 
@@ -11,8 +9,6 @@ interface ICommandsGrid {
 
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
   // Sidebar
-  // const active = useScrollSpy({ items: commandsGroups })
-  // const activeIndex = active ? findIndex(commandsGroups, ["name", active]) : false
   const tabsHTML = commandsGroups.map(({ name }) => (
     <Link key={name} href={`#${name}`}>
       <Tab label={name} />
@@ -54,10 +50,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
   return (
     <>
       <Box position="fixed" width={sidebarWidth}>
-        <Tabs orientation="vertical">
-          {/* value={activeIndex} */}
-          {tabsHTML}
-        </Tabs>
+        <Tabs orientation="vertical">{tabsHTML}</Tabs>
       </Box>
 
       <Box marginLeft={sidebarWidth} paddingLeft={2} display="flex" flexDirection="column">
