@@ -1,45 +1,18 @@
 import Head from "next/head"
+import dynamic from "next/dynamic"
 import { GetStaticProps, InferGetStaticPropsType } from "next"
 import CssBaseline from "@material-ui/core/CssBaseline"
-import { StylesProvider, Grid, Box, Typography } from "@material-ui/core/"
+import { StylesProvider, Box, Typography } from "@material-ui/core/"
 import { ThemeProvider } from "@material-ui/core/styles"
 
 import RayTheme from "../components/RayTheme"
-import { Command } from "../components/CommandCard"
-import CommandCard from "../components/CommandCard/CommandCard"
+import { CommandsGroup } from "../components/CommandsGrid"
 
-interface CommandsGroup {
-  name: string
-  path: string
-  scriptCommands: Command[]
-  subGroups?: CommandsGroup[]
-}
+// Required for using `window` and `document` from the scrollSpy utils
+const CommandsGrid = dynamic(() => import("../components/CommandsGrid/CommandsGrid"), { ssr: false })
 
 export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   // console.log(commands[0].subGroups[0].scriptCommands[0].title)
-
-  function commandsFactory(scriptCommands: Command[]): JSX.Element {
-    return (
-      <Grid container spacing={3}>
-        {scriptCommands.map((command: Command) => (
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          <CommandCard key={command.title} {...command} />
-        ))}
-      </Grid>
-    )
-  }
-
-  function groupsFactory(groups: CommandsGroup[], isSubGroup = false) {
-    return groups.map((group: CommandsGroup) => (
-      <Box key={group.name}>
-        <Typography key={group.name} variant={isSubGroup ? "h6" : "h5"}>
-          {group.name}
-        </Typography>
-        {group.scriptCommands.length !== 0 && commandsFactory(group.scriptCommands)}
-        {group.subGroups && groupsFactory(group.subGroups, true)}
-      </Box>
-    ))
-  }
 
   return (
     <StylesProvider injectFirst>
@@ -54,9 +27,7 @@ export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof 
             <Typography variant="h3" textAlign="center">
               Unofficial Marketplace <br /> for Raycast Script Commands
             </Typography>
-            <Box display="flex" flexDirection="column">
-              {groupsFactory(commandsGroups)}
-            </Box>
+            <CommandsGrid commandsGroups={commandsGroups} />
           </Box>
         </main>
       </ThemeProvider>
