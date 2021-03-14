@@ -1,6 +1,10 @@
 import { Card, Typography, Box, Link, Grid, CardActionArea } from "@material-ui/core"
 import Command from "./types"
 
+interface ICommandCard extends Command {
+  isHidden: boolean
+}
+
 export default function CommandCard({
   title,
   description,
@@ -9,9 +13,10 @@ export default function CommandCard({
   language,
   isTemplate,
   hasArguments,
-}: Command): JSX.Element {
-  // Source: https://stackoverflow.com/a/20292655/7897036
-  const capitalize = (string = "") => [...string].map((char, index) => (index ? char : char.toUpperCase())).join("")
+  isHidden,
+}: ICommandCard): JSX.Element {
+  // Source: https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
+  const capitalize = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
 
   const iconElement = () => {
     if (icon === null) {
