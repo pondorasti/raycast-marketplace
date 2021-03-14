@@ -36,31 +36,33 @@ export default function CommandCard({
   return (
     <Grid item xs={6}>
       <Card sx={{ height: "100%" }}>
-        <CardActionArea>
-          <Box display="flex" alignItems="baseline">
-            {iconElement()}
-            <Typography variant="h6" fontWeight="bold" paddingLeft="8px">
-              {title}
-            </Typography>
+        <CardActionArea
+          sx={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+          }}
+        >
+          <Box>
+            <Box display="flex" alignItems="baseline">
+              {iconElement()}
+              <Typography variant="h6" fontWeight="bold" paddingLeft="8px">
+                {title}
+              </Typography>
+            </Box>
+
+            <Typography paddingTop="4px">{description || "N/A"}</Typography>
           </Box>
 
-          <Typography paddingTop="4px">{description || "N/A"}</Typography>
           <Box>
-            <Typography color="textSecondary">
+            <Typography height="100%" color="textSecondary">
               {isTemplate ? "Template • " : ""}
               {hasArguments ? "Arguments • " : ""}
               {capitalize(language)}
               {" • "}
               {authorElements}
-              {/* <Link
-                href="https://github.com/raycast/script-commands/tree/master/commands#slack"
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="body1"
-                color="inherit"
-              >
-                By Alexandru Turcanu
-              </Link> */}
             </Typography>
           </Box>
         </CardActionArea>

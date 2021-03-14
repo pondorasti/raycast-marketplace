@@ -24,7 +24,7 @@ export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof 
         </Head>
         <main>
           <Box padding="64px">
-            <Typography variant="h3" textAlign="center">
+            <Typography variant="h3" textAlign="center" paddingBottom={8}>
               Unofficial Marketplace <br /> for Raycast Script Commands
             </Typography>
             <CommandsGrid commandsGroups={commandsGroups} />
