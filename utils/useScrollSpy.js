@@ -4,7 +4,7 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import useThrottledOnScroll from "./usethrottledOnScroll"
 
-const getItemsClient = (items) => items.map(({ hash }) => ({ hash, node: document.getElementById(hash) }))
+const getItemsClient = (items) => items.map(({ name }) => ({ hash: name, node: document.getElementById(name) }))
 
 const useScrollSpy = ({ items = [], target = window } = {}) => {
   const itemsWithNodeRef = useRef([])
@@ -19,7 +19,7 @@ const useScrollSpy = ({ items = [], target = window } = {}) => {
     for (let i = itemsWithNodeRef.current.length - 1; i >= 0; i -= 1) {
       // No hash if we're near the top of the page
       if (document.documentElement.scrollTop < 200) {
-        active = { hash: null }
+        active = { name: null }
         break
       }
 
