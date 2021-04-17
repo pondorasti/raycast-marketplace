@@ -8,6 +8,8 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import RayTheme from "../components/RayTheme"
 import { CommandsGroup } from "../components/CommandsGrid"
 
+import HeroSection from "../components/HeroSection/HeroSection"
+
 // Required for using `window` and `document` from the scrollSpy utils
 const CommandsGrid = dynamic(() => import("../components/CommandsGrid/CommandsGrid"), { ssr: false })
 
@@ -23,13 +25,8 @@ export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof 
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main>
-          <Box padding="64px">
-            <Typography variant="h3" textAlign="center" paddingBottom={4}>
-              Unofficial Marketplace <br /> for Raycast Script Commands
-            </Typography>
-
-            <CommandsGrid commandsGroups={commandsGroups} />
-          </Box>
+          <HeroSection />
+          <CommandsGrid commandsGroups={commandsGroups} />
         </main>
       </ThemeProvider>
     </StylesProvider>

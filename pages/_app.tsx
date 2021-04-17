@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import * as Fathom from "fathom-client"
+import "tailwindcss/tailwind.css"
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   // Fathom
