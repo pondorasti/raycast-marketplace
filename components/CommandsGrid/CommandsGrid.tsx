@@ -54,7 +54,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
         <p
           className={classNames(
             isSubGroup ? "text-2xl" : "text-3xl",
-            "bg-gray-50 -mx-4 px-4 font-bold py-3 z-10 sticky top-0"
+            "bg-gray-50 -mx-4 px-4 font-bold tracking-tight py-3 z-10 sticky top-0"
           )}
         >
           {group.name}
@@ -75,15 +75,15 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
   return (
     <div className="flex">
       {/* Sidebar */}
-      <div className="flex flex-shrink-0 sticky top-0" style={{ height: "fit-content" }}>
+      <div className="flex flex-shrink-0 sticky top-0 pt-14 mr-4" style={{ height: "fit-content" }}>
         <div className="flex flex-col w-48">
           <div className="flex-1 flex-col">
-            <nav className="flex-1 px-2 space-y-1">{tabsHTML}</nav>
+            <nav className="flex-1 space-y-1">{tabsHTML}</nav>
           </div>
         </div>
       </div>
 
-      <div className="flex-col px-4">{groupsFactory(commandsGroups)}</div>
+      <div className="flex-col">{groupsFactory(commandsGroups)}</div>
     </div>
   )
 }
