@@ -46,7 +46,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
         return <CommandCard key={command.title} {...command} isHidden={isHidden} />
       })
 
-      return <div className="grid grid-cols-2 gap-4 pb-5">{cards}</div>
+      return <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-5">{cards}</div>
     }
 
     return groups.map((group: CommandsGroup) => (
