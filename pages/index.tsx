@@ -1,4 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next"
+import Head from "next/head"
 import remark from "remark"
 import remarkHtml from "remark-html"
 import remarkExternalLinks from "remark-external-links"
@@ -7,10 +8,15 @@ import HeroSection from "../components/HeroSection/HeroSection"
 
 export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   return (
-    <main className="bg-gray-50">
-      <HeroSection />
-      <CommandsGrid commandsGroups={commandsGroups} />
-    </main>
+    <>
+      <Head>
+        <title>Raycast Marketplace</title>
+      </Head>
+      <main className="bg-gray-50">
+        <HeroSection />
+        <CommandsGrid commandsGroups={commandsGroups} />
+      </main>
+    </>
   )
 }
 
