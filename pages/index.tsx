@@ -1,11 +1,7 @@
 import Head from "next/head"
 import dynamic from "next/dynamic"
 import { GetStaticProps, InferGetStaticPropsType } from "next"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import { StylesProvider, Box, Typography } from "@material-ui/core/"
-import { ThemeProvider } from "@material-ui/core/styles"
 
-import RayTheme from "../components/RayTheme"
 import { CommandsGroup } from "../components/CommandsGrid"
 
 import HeroSection from "../components/HeroSection/HeroSection"
@@ -17,19 +13,16 @@ export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof 
   // console.log(commands[0].subGroups[0].scriptCommands[0].title)
 
   return (
-    <StylesProvider injectFirst>
-      <ThemeProvider theme={RayTheme}>
-        <CssBaseline />
-        <Head>
-          <title>Raycast Marketplace</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <main>
-          <HeroSection />
-          <CommandsGrid commandsGroups={commandsGroups} />
-        </main>
-      </ThemeProvider>
-    </StylesProvider>
+    <>
+      <Head>
+        <title>Raycast Marketplace</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className="bg-gray-50">
+        <HeroSection />
+        <CommandsGrid commandsGroups={commandsGroups} />
+      </main>
+    </>
   )
 }
 

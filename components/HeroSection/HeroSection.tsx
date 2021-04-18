@@ -1,6 +1,6 @@
 export default function HeroSection(): JSX.Element {
   return (
-    <div className="relative bg-gray-50 overflow-hidden">
+    <div className="relative overflow-hidden">
       <div className="hidden sm:block sm:absolute sm:inset-y-0 sm:h-full sm:w-full" aria-hidden="true">
         <div className="relative h-full max-w-7xl mx-auto">
           <svg

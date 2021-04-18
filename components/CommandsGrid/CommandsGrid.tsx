@@ -1,6 +1,4 @@
 import { useState, ChangeEvent } from "react"
-import Link from "next/link"
-import { Tab, Tabs, Box, Typography, Grid, TextField } from "@material-ui/core"
 import CommandsGroup from "./types"
 import { Command, CommandCard } from "../CommandCard"
 
@@ -8,12 +6,23 @@ interface ICommandsGrid {
   commandsGroups: CommandsGroup[]
 }
 
+function classNames(...classes: string[]): string {
+  return classes.filter(Boolean).join(" ")
+}
+
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
   // Sidebar
   const tabsHTML = commandsGroups.map(({ name }) => (
-    <Link key={name} href={`#${name}`}>
-      <Tab label={name} />
-    </Link>
+    <a
+      key={name}
+      href={`#${name}`}
+      className={classNames(
+        false ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-200 hover:text-gray-900",
+        "flex p-2 text-sm font-medium rounded-md"
+      )}
+    >
+      {name}
+    </a>
   ))
 
   // Grid
@@ -37,61 +46,44 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
         return <CommandCard key={command.title} {...command} isHidden={isHidden} />
       })
 
-      return (
-        <Grid container spacing={3}>
-          {cards}
-        </Grid>
-      )
+      return <div className="grid grid-cols-2 gap-4 pb-5">{cards}</div>
     }
 
     return groups.map((group: CommandsGroup) => (
-      <Box key={group.name} id={group.name} display={hasAtLeastOneCard ? "block" : "none"}>
-        <Typography
-          key={group.name}
-          variant={isSubGroup ? "h6" : "h5"}
-          position="sticky"
-          top="120px"
-          zIndex={1}
-          bgcolor="background.default"
+      <div key={group.name} id={group.name} className={classNames(hasAtLeastOneCard ? "block" : "hidden")}>
+        <p
+          className={classNames(
+            isSubGroup ? "text-2xl" : "text-3xl",
+            "bg-gray-50 -mx-4 px-4 font-bold py-3 z-10 sticky top-0"
+          )}
         >
           {group.name}
-        </Typography>
+        </p>
         {group.scriptCommands.length !== 0 && commandsFactory(group.scriptCommands)}
 
         {/* Render subGroups */}
         {group.subGroups && groupsFactory(group.subGroups, true)}
-      </Box>
+      </div>
     ))
   }
 
-  const sidebarWidth = "200px"
   const [searchQuery, setSearchQuery] = useState("")
   const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
     // setSearchQuery(event.target.value)
   }
 
   return (
-    <>
-      <Box
-        position="sticky"
-        top="0"
-        paddingTop={4}
-        paddingBottom={4}
-        zIndex={10}
-        width="100%"
-        bgcolor="background.default"
-      >
-        <TextField label="Search" value={searchQuery} onChange={handleSearchQuery} fullWidth />
-      </Box>
+    <div className="flex">
+      {/* Sidebar */}
+      <div className="flex flex-shrink-0 sticky top-0" style={{ height: "fit-content" }}>
+        <div className="flex flex-col w-48">
+          <div className="flex-1 flex-col">
+            <nav className="flex-1 px-2 space-y-1">{tabsHTML}</nav>
+          </div>
+        </div>
+      </div>
 
-      <Box display="flex">
-        <Box position="sticky" top="120px" height="fit-content" width={sidebarWidth}>
-          <Tabs orientation="vertical">{tabsHTML}</Tabs>
-        </Box>
-        <Box paddingLeft={2} display="flex" flexDirection="column">
-          {groupsFactory(commandsGroups)}
-        </Box>
-      </Box>
-    </>
+      <div className="flex-col px-4">{groupsFactory(commandsGroups)}</div>
+    </div>
   )
 }
