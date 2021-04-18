@@ -11,6 +11,7 @@ type Icon = {
 type Command = {
   title: string
   description?: string
+  descriptionHtml: string
   icon: Icon
 
   authors?: Author[]

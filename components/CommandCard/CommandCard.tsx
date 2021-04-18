@@ -6,7 +6,7 @@ interface ICommandCard extends Command {
 
 export default function CommandCard({
   title,
-  description,
+  descriptionHtml,
   icon,
   authors,
   language,
@@ -50,7 +50,8 @@ export default function CommandCard({
         <p className="ml-2 text-xl font-semibold text-gray-900">{title}</p>
       </div>
 
-      <p className="my-2 text-base text-gray-500">{description || "N/A"}</p>
+      {/* eslint-disable-next-line react/no-danger */}
+      <div className="my-2 text-base text-gray-500 prose" dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
       <p className="mt-auto text-sm text-gray-500">
         {isTemplate ? "Template • " : ""}
         {hasArguments ? "Arguments • " : ""}
