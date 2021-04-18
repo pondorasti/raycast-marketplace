@@ -11,7 +11,7 @@ export default class Document extends NextDocument {
 
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
-        <body>
+        <body className="max-w-7xl mx-auto">
           <Main />
           <NextScript />
           <script> </script>
