@@ -11,6 +11,7 @@ const CommandsGrid = dynamic(() => import("../components/CommandsGrid/CommandsGr
 
 export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   // console.log(commands[0].subGroups[0].scriptCommands[0].title)
+  // Hello nextjs
 
   return (
     <>
