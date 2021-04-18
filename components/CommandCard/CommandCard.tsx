@@ -38,7 +38,7 @@ export default function CommandCard({
       rel="noopener noreferrer"
       className="no-underline hover:underline"
     >
-      {index === 0 ? "By " : " and "}
+      {index === 0 ? " • By " : " and "}
       {author.name}
     </a>
   ))
@@ -56,7 +56,6 @@ export default function CommandCard({
         {isTemplate ? "Template • " : ""}
         {hasArguments ? "Arguments • " : ""}
         {capitalize(language)}
-        {" • "}
         {authorElements}
       </p>
     </div>
