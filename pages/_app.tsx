@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return () => {
       router.events.off("routeChangeComplete", onRouteChangeComplete)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // eslint-disable-next-line react/jsx-props-no-spreading
