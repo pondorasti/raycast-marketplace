@@ -1,6 +1,7 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next"
 import remark from "remark"
 import remarkHtml from "remark-html"
+import remarkExternalLinks from "remark-external-links"
 import { CommandsGrid, CommandsGroup } from "../components/CommandsGrid"
 import HeroSection from "../components/HeroSection/HeroSection"
 
@@ -24,7 +25,12 @@ export const getStaticProps: GetStaticProps = async () => {
     groups.forEach(async (group) => {
       group.scriptCommands.forEach(async (script) => {
         const description = script.description || "N/A"
-        const descriptionHtml = (await remark().use(remarkHtml, { sanitize: true }).process(description)).toString()
+        const descriptionHtml = (
+          await remark()
+            .use(remarkExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] })
+            .use(remarkHtml, { sanitize: true })
+            .process(description)
+        ).toString()
         // eslint-disable-next-line no-param-reassign
         script.descriptionHtml = descriptionHtml
       })
