@@ -13,6 +13,9 @@ module.exports = {
         5.5: "1.375rem",
         15: "3.75rem",
       },
+      colors: {
+        ray: "#FF6363",
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: [
