@@ -1,10 +1,7 @@
+import React from "react"
 import Command from "./types"
 
-interface ICommandCard extends Command {
-  isHidden: boolean
-}
-
-export default function CommandCard({
+function CommandCard({
   title,
   descriptionHtml,
   icon,
@@ -12,8 +9,7 @@ export default function CommandCard({
   language,
   isTemplate,
   hasArguments,
-  isHidden,
-}: ICommandCard): JSX.Element {
+}: Command): JSX.Element {
   // Source: https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
   const capitalize = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
 
@@ -68,3 +64,7 @@ export default function CommandCard({
   height={32}
   width={32}
 /> */
+
+const memoizedCommandCard = React.memo(CommandCard)
+
+export default memoizedCommandCard
