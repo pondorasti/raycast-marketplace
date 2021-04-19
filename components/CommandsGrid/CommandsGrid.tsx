@@ -1,5 +1,6 @@
-import { useState, ChangeEvent } from "react"
+import { useState, useCallback, ChangeEvent } from "react"
 import { SearchIcon } from "@heroicons/react/solid"
+import debounce from "lodash.debounce"
 import CommandsGroup from "./types"
 import { Command, CommandCard } from "../CommandCard"
 
@@ -14,8 +15,12 @@ function classNames(...classes: string[]): string {
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
   const baseGroupNameStyles = "-mx-4 px-4 font-bold tracking-tight py-3 z-10 sticky top-0 backdrop-filter backdrop-blur"
   const [searchQuery, setSearchQuery] = useState("")
+  const debouncedSearch = useCallback(
+    debounce((newValue: string) => setSearchQuery(newValue), 300),
+    []
+  )
   const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value)
+    debouncedSearch(event.target.value.toLowerCase())
   }
 
   // Sidebar
@@ -96,7 +101,13 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
         </div>
       </div>
 
-      <div className="flex-col">{groupsFactory(commandsGroups)}</div>
+      {/* Grid */}
+      <div className="flex-col">
+        <p className={classNames(searchQuery === "" ? "hidden" : "block", "text-3xl", baseGroupNameStyles)}>
+          {searchQuery}
+        </p>
+        {groupsFactory(commandsGroups)}
+      </div>
     </div>
   )
 }
