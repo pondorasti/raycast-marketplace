@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
+      spacing: {
+        15: "3.75rem",
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: [
@@ -31,5 +34,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 }
