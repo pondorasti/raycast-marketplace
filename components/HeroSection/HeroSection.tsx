@@ -1,6 +1,6 @@
 export default function HeroSection(): JSX.Element {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-y-hidden">
       <div className="hidden sm:block sm:absolute sm:inset-y-0 sm:h-full sm:w-full" aria-hidden="true">
         <div className="relative h-full max-w-7xl mx-auto">
           <svg
@@ -48,10 +48,17 @@ export default function HeroSection(): JSX.Element {
         </div>
       </div>
 
-      <div className="my-16 mx-auto max-w-7xl px-4 sm:my-24">
+      <div className="my-16 mx-auto max-w-7xl px-4 sm:my-24 z-10">
         <div className="text-center">
           <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-            <span className="block text-indigo-600">Unofficial Marketplace</span>{" "}
+            <span
+              className="block text-ray"
+              style={{
+                textShadow: "0 0 8px #fff, 0 0 30px #FF6363",
+              }}
+            >
+              Unofficial Marketplace
+            </span>{" "}
             <span className="block xl:inline">for Raycast Script Commands</span>
           </h1>
         </div>
