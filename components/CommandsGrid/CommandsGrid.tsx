@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent } from "react"
+import { useState, useCallback, ChangeEvent, useRef } from "react"
 import { SearchIcon } from "@heroicons/react/solid"
 import debounce from "lodash.debounce"
 import CommandsGroup from "./types"
@@ -13,12 +13,14 @@ function classNames(...classes: string[]): string {
 }
 
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
+  const searchInputRef = useRef<HTMLFormElement>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const debouncedSearch = useCallback(
     debounce((newValue: string) => setSearchQuery(newValue), 200),
     []
   )
   const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
     debouncedSearch(event.target.value.toLowerCase())
   }
 
@@ -32,6 +34,10 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
         "text-gray-600 hover:bg-gray-200 hover:text-gray-900",
         "flex p-2 text-sm font-medium rounded-md"
       )}
+      onClick={() => {
+        searchInputRef.current?.reset()
+        setSearchQuery("")
+      }}
     >
       {name}
     </a>
@@ -94,7 +100,11 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
       <div className="flex flex-shrink-0 sticky top-0 pt-15 mr-7" style={{ height: "fit-content" }}>
         <div className="flex flex-col w-48">
           <div className="flex-1 flex-col">
-            <div className="mt-1 relative rounded-md shadow-sm">
+            <form
+              className="mt-1 relative rounded-md shadow-sm"
+              ref={searchInputRef}
+              onSubmit={(event) => event.preventDefault()}
+            >
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
               </div>
@@ -104,7 +114,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
                 placeholder="Search"
                 onChange={handleSearchQuery}
               />
-            </div>
+            </form>
             {/* <p className="p-2 opacity-25">{numb} Results</p> */}
             <h3 className="p-2 mt-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">Categories</h3>
             <nav className="flex-1 space-y-1">{tabsHTML}</nav>
