@@ -13,7 +13,8 @@ function classNames(...classes: string[]): string {
 }
 
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
-  const baseGroupNameStyles = "-mx-4 px-4 font-bold tracking-tight py-3 z-10 sticky top-0 backdrop-filter backdrop-blur"
+  const baseGroupNameStyles =
+    "-mx-5.5 px-5.5 font-bold tracking-tight py-3 z-10 sticky top-0 backdrop-filter backdrop-blur"
   const [searchQuery, setSearchQuery] = useState("")
   const debouncedSearch = useCallback(
     debounce((newValue: string) => setSearchQuery(newValue), 300),
