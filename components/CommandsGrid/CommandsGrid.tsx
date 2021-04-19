@@ -28,7 +28,8 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
       key={name}
       href={`#${name}`}
       className={classNames(
-        false ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-200 hover:text-gray-900",
+        // false ? "bg-gray-100 text-gray-900" :
+        "text-gray-600 hover:bg-gray-200 hover:text-gray-900",
         "flex p-2 text-sm font-medium rounded-md"
       )}
     >
@@ -53,7 +54,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
       })
 
       // Return empty Fragment if there's nothing to show
-      if (filteredScriptCommands.length === 0) {
+      if (filteredScriptCommands.length === 0 && searchQuery !== "") {
         return <></>
       }
 
@@ -72,7 +73,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
           >
             {group.name}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-5">{cards}</div>
+          {cards.length !== 0 && <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-5">{cards}</div>}
         </div>
       )
     }
@@ -104,8 +105,9 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
                 onChange={handleSearchQuery}
               />
             </div>
-            {/* <p className="mt-8">Browse By</p> */}
-            <nav className="flex-1 space-y-1 mt-8">{tabsHTML}</nav>
+            {/* <p className="p-2 opacity-25">{numb} Results</p> */}
+            <h3 className="p-2 mt-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">Categories</h3>
+            <nav className="flex-1 space-y-1">{tabsHTML}</nav>
           </div>
         </div>
       </div>
