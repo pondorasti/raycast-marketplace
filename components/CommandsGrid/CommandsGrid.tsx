@@ -13,11 +13,9 @@ function classNames(...classes: string[]): string {
 }
 
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
-  const baseGroupNameStyles =
-    "-mx-5.5 px-5.5 font-bold tracking-tight py-3 z-10 sticky top-0 backdrop-filter backdrop-blur"
   const [searchQuery, setSearchQuery] = useState("")
   const debouncedSearch = useCallback(
-    debounce((newValue: string) => setSearchQuery(newValue), 300),
+    debounce((newValue: string) => setSearchQuery(newValue), 200),
     []
   )
   const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,39 +38,49 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
 
   // Grid
   function groupsFactory(groups: CommandsGroup[], isSubGroup = false): JSX.Element[] {
-    function shouldHideCard(command: Command): boolean {
-      return command.title.toLowerCase().includes("trans")
-    }
     // Inner factory for building the Grid of Cards
-    function commandsFactory(scriptCommands: Command[]): JSX.Element {
-      const cards = scriptCommands.map((command: Command) => {
-        const isHidden = shouldHideCard(command)
-
-        // TODO: use props={command} after fixing null icon
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        return <CommandCard key={command.title} {...command} isHidden={isHidden} />
+    function commandsFactory(group: CommandsGroup, isSubGroupPrime = false): JSX.Element {
+      const filteredScriptCommands = group.scriptCommands.filter((command) => {
+        const filteredAuthors = command.authors?.filter((author) => author.name.toLowerCase().includes(searchQuery))
+        return (
+          command.title.toLowerCase().includes(searchQuery) ||
+          command.description?.toLowerCase().includes(searchQuery) ||
+          command.language.toLowerCase().includes(searchQuery) ||
+          (command.isTemplate && "template".includes(searchQuery)) ||
+          (command.hasArguments && "arguments".includes(searchQuery)) ||
+          (filteredAuthors !== undefined && filteredAuthors.length !== 0)
+        )
       })
 
-      return <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-5">{cards}</div>
+      // Return empty Fragment if there's nothing to show
+      if (filteredScriptCommands.length === 0) {
+        return <></>
+      }
+
+      const cards = filteredScriptCommands.map((command: Command) => {
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        return <CommandCard key={command.title} {...command} />
+      })
+
+      return (
+        <div key={group.name} id={group.name}>
+          <p
+            className={classNames(
+              isSubGroupPrime ? "text-2xl" : "text-3xl",
+              "-mx-5.5 px-5.5 font-bold tracking-tight py-3 z-10 sticky top-0 backdrop-filter backdrop-blur"
+            )}
+          >
+            {group.name}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-5">{cards}</div>
+        </div>
+      )
     }
 
     return groups.map((group: CommandsGroup) => {
-      const commands = commandsFactory(group.scriptCommands)
       return (
         <>
-          <div key={group.name} id={group.name}>
-            <p
-              className={classNames(
-                searchQuery !== "" ? "hidden" : "block",
-                isSubGroup ? "text-2xl" : "text-3xl",
-                baseGroupNameStyles
-              )}
-            >
-              {group.name}
-            </p>
-            {group.scriptCommands.length !== 0 && commands}
-          </div>
-          {/* Render subGroups */}
+          {commandsFactory(group, isSubGroup)}
           {group.subGroups && groupsFactory(group.subGroups, true)}
         </>
       )
@@ -103,12 +111,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
       </div>
 
       {/* Grid */}
-      <div className="flex-col">
-        <p className={classNames(searchQuery === "" ? "hidden" : "block", "text-3xl", baseGroupNameStyles)}>
-          {searchQuery}
-        </p>
-        {groupsFactory(commandsGroups)}
-      </div>
+      <div className="flex-col w-full">{groupsFactory(commandsGroups)}</div>
     </div>
   )
 }
