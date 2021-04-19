@@ -91,7 +91,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
   return (
     <div className="flex">
       {/* Sidebar */}
-      <div className="flex flex-shrink-0 sticky top-0 pt-15 mr-6" style={{ height: "fit-content" }}>
+      <div className="flex flex-shrink-0 sticky top-0 pt-15 mr-7" style={{ height: "fit-content" }}>
         <div className="flex flex-col w-48">
           <div className="flex-1 flex-col">
             <div className="mt-1 relative rounded-md shadow-sm">
@@ -100,7 +100,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
               </div>
               <input
                 type="search"
-                className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                className="focus:ring-ray focus:border-ray focus:ring-opacity-50 focus:ring-2 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
                 placeholder="Search"
                 onChange={handleSearchQuery}
               />
