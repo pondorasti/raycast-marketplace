@@ -9,6 +9,8 @@ function CommandCard({
   language,
   isTemplate,
   hasArguments,
+  path,
+  filename,
 }: Command): JSX.Element {
   // Source: https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
   const capitalize = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
@@ -27,20 +29,27 @@ function CommandCard({
   }
 
   const authorElements = authors?.map((author, index) => (
-    <a
-      key={author.name}
-      href={author.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="no-underline hover:underline"
-    >
+    <>
       {index === 0 ? " • By " : " and "}
-      {author.name}
-    </a>
+      <a
+        key={author.name}
+        href={author.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="no-underline hover:underline"
+      >
+        {author.name}
+      </a>
+    </>
   ))
 
   return (
-    <div className="flex flex-col bg-white p-4 shadow-lg rounded-lg">
+    <a
+      href={`https://github.com/raycast/script-commands/blob/master/commands/${path}${filename}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex flex-col bg-white p-4 shadow-lg rounded-lg"
+    >
       <div className="flex items-baseline">
         {iconElement()}
         <p className="ml-2 text-xl font-semibold text-gray-900">{title}</p>
@@ -54,7 +63,7 @@ function CommandCard({
         {capitalize(language)}
         {authorElements}
       </p>
-    </div>
+    </a>
   )
 }
 

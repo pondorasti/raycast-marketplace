@@ -19,6 +19,9 @@ type Command = {
   language: string
   isTemplate: boolean
   hasArguments: boolean
+
+  path: string
+  filename: string
 }
 
 export default Command
