@@ -1,4 +1,5 @@
 import React from "react"
+import Image from "next/image"
 import Command from "./types"
 
 function CommandCard({
@@ -29,7 +30,7 @@ function CommandCard({
     // Github Image
     if (iconString?.includes("images") && !iconString?.includes("http")) {
       const githubPath = `https://raw.githubusercontent.com/raycast/script-commands/master/commands/${path}${iconString}`
-      return <img src={githubPath} alt="" width="24px" height="24px" />
+      return <Image src={githubPath} alt="" width="24px" height="24px" />
     }
     // External URL Image
     if (iconString?.includes("http")) return <img src={iconString} alt="" width="24px" height="24px" />
