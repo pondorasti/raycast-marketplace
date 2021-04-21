@@ -16,18 +16,34 @@ function CommandCard({
   const capitalize = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
 
   const iconElement = () => {
-    if (icon === null) {
-      return <p className="text-xl font-semibold">👋</p>
-    }
+    const pTag = (emoji: string) => <p className="text-xl font-semibold">{emoji}</p>
 
-    let emojiIcon = icon.dark || icon.light
-    if (emojiIcon.includes("images")) {
-      emojiIcon = "👋"
-    }
+    // Undefined Icon
+    if (icon === undefined) return pTag("👋")
 
-    return <p className="text-xl font-semibold">{emojiIcon}</p>
+    // prioritize light over dark
+    const iconString = icon.light || icon.dark
+
+    // Empty Icon String
+    if (iconString === undefined) return pTag("👋")
+    // Github Image
+    if (iconString?.includes("images") && !iconString?.includes("http")) {
+      const githubPath = `https://raw.githubusercontent.com/raycast/script-commands/master/commands/${path}${iconString}`
+      return <img src={githubPath} alt="" width="24px" height="24px" />
+    }
+    // External URL Image
+    if (iconString?.includes("http")) return <img src={iconString} alt="" width="24px" height="24px" />
+    // Emoji
+    return pTag(iconString)
   }
 
+  // onClick={() => openInNewTab(author.url)}
+  // const openInNewTab = (url: string) => {
+  //   const newWindow = window.open(url, "_blank", "noopener,noreferrer")
+  //   if (newWindow) newWindow.opener = null
+  // }
+
+  // {/* {index === 0 ? " • By " : " and "} */}
   const authorElements = authors?.map((author, index) => (
     <>
       {index === 0 ? " • By " : " and "}
@@ -50,7 +66,7 @@ function CommandCard({
       rel="noopener noreferrer"
       className="flex flex-col bg-white p-4 shadow-lg rounded-lg"
     >
-      <div className="flex items-baseline">
+      <div className="flex items-center">
         {iconElement()}
         <p className="ml-2 text-xl font-semibold text-gray-900">{title}</p>
       </div>
@@ -61,18 +77,11 @@ function CommandCard({
         {isTemplate ? "Template • " : ""}
         {hasArguments ? "Arguments • " : ""}
         {capitalize(language)}
-        {authorElements}
+        {!!authorElements && authorElements}
       </p>
     </a>
   )
 }
-
-/* <img
-  src="https://raw.githubusercontent.com/raycast/script-commands/master/commands/dashboard/images/speedtest-logo.png"
-  alt="test"
-  height={32}
-  width={32}
-/> */
 
 const memoizedCommandCard = React.memo(CommandCard)
 

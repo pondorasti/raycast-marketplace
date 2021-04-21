@@ -4,7 +4,7 @@ type Author = {
 }
 
 type Icon = {
-  light: string
+  light?: string
   dark?: string
 }
 
