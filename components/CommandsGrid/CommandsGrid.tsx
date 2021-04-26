@@ -1,9 +1,9 @@
 import { useState, useCallback, ChangeEvent, useRef } from "react"
 import { SearchIcon } from "@heroicons/react/solid"
 import debounce from "lodash.debounce"
+import classNames from "@utils/classNames"
 import CommandsGroup from "./types"
 import { Command, CommandCard } from "../CommandCard"
-import classNames from "../../utils/classNames"
 
 interface ICommandsGrid {
   commandsGroups: CommandsGroup[]
