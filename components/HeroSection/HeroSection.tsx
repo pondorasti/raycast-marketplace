@@ -54,12 +54,12 @@ export default function HeroSection(): JSX.Element {
             <span
               className="block text-ray"
               style={{
-                textShadow: "0 0 8px #fff, 0 0 30px #FF6363",
+                textShadow: "0 0 8px #000, #FF6363 0 0 20px ",
               }}
             >
               Unofficial Marketplace
             </span>{" "}
-            <span className="block xl:inline">for Raycast Script Commands</span>
+            <span className="block xl:inline dark:text-white dark:text-opacity-95">for Raycast Script Commands</span>
           </h1>
         </div>
       </div>
