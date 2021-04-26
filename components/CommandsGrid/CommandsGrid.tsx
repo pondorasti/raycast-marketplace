@@ -2,6 +2,7 @@ import { useState, useCallback, ChangeEvent, useRef } from "react"
 import { SearchIcon } from "@heroicons/react/solid"
 import debounce from "lodash.debounce"
 import classNames from "@utils/classNames"
+import { bluredBackground, navigationBarOffset } from "@utils/styles"
 import CommandsGroup from "./types"
 import { Command, CommandCard } from "../CommandCard"
 
@@ -71,7 +72,9 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
           <p
             className={classNames(
               isSubGroupPrime ? "text-2xl" : "text-3xl",
-              "-mx-5.5 px-5.5 font-bold tracking-tight py-3 z-10 sticky top-0 backdrop-filter backdrop-blur"
+              bluredBackground,
+              navigationBarOffset,
+              "-mx-5.5 px-5.5 font-bold tracking-tight py-3 z-10 sticky"
             )}
           >
             {group.name}
@@ -94,11 +97,14 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
   return (
     <div className="flex">
       {/* Sidebar */}
-      <div className="flex flex-shrink-0 sticky top-0 pt-15 mr-7" style={{ height: "fit-content" }}>
+      <div
+        className={classNames("flex flex-shrink-0 sticky mr-7", navigationBarOffset)}
+        style={{ height: "fit-content" }}
+      >
         <div className="flex flex-col w-48">
           <div className="flex-1 flex-col">
             <form
-              className="mt-1 relative rounded-md shadow-sm"
+              className="relative rounded-md shadow-sm my-2"
               ref={searchInputRef}
               onSubmit={(event) => event.preventDefault()}
             >
