@@ -12,7 +12,7 @@ export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof 
       <Head>
         <title>Raycast Marketplace</title>
       </Head>
-      <main className="bg-gray-50">
+      <main className="bg-gray-50 dark:bg-darkGray-600">
         <HeroSection />
         <CommandsGrid commandsGroups={commandsGroups} />
       </main>

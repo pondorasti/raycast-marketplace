@@ -5,7 +5,7 @@ import { bluredBackground, navigationBarHeight, horizontalPadding } from "@utils
 export default class Document extends NextDocument {
   render(): JSX.Element {
     return (
-      <Html lang="en" className="bg-gray-50">
+      <Html lang="en" className="bg-gray-50 dark:bg-darkGray-600">
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
@@ -14,11 +14,11 @@ export default class Document extends NextDocument {
           <header className={classNames("sticky top-0 z-30", bluredBackground, horizontalPadding)}>
             <div
               className={classNames(
-                "flex items-center justify-between py-5 border-b border-gray-200",
+                "flex items-center justify-between py-5 border-b border-gray-200 dark:border-gray-800",
                 navigationBarHeight
               )}
             >
-              <a className="text-gray-900 text-lg font-semibold" href="/">
+              <a className="text-gray-900 dark:text-white dark:text-opacity-95 text-lg font-semibold" href="/">
                 Raycast Marketplace
               </a>
               <a className="text-gray-400 hover:text-white" href="https://github.com/tailwindlabs/headlessui">
