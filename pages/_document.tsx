@@ -1,5 +1,6 @@
 import NextDocument, { Html, Head, Main, NextScript } from "next/document"
 import classNames from "@utils/classNames"
+import { bluredBackground } from "@utils/styles"
 
 export default class Document extends NextDocument {
   render(): JSX.Element {
@@ -11,9 +12,9 @@ export default class Document extends NextDocument {
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <body className="max-w-7xl mx-auto">
-          <header className="sticky top-0 z-30 bg-opacity-50 h-[72px] bg-gray-50 backdrop-filter backdrop-blur firefox:bg-opacity-90">
+          <header className={classNames("sticky top-0 z-30 h-[69px]", bluredBackground)}>
             <div className={classNames("flex items-center justify-between py-5 border-b border-gray-200", sideMargins)}>
-              <a className="block" href="/react">
+              <a className="text-gray-900 text-lg font-semibold" href="/">
                 Raycast Marketplace
               </a>
               <a className="text-gray-400 hover:text-white" href="https://github.com/tailwindlabs/headlessui">
