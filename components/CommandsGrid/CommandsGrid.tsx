@@ -102,7 +102,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
         style={{ height: "fit-content" }}
       >
         <form
-          className="relative rounded-md shadow-sm my-2 px-1"
+          className="relative rounded-md shadow-sm my-2 mx-1"
           ref={searchInputRef}
           onSubmit={(event) => event.preventDefault()}
         >
