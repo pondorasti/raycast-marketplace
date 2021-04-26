@@ -1,10 +1,9 @@
 import NextDocument, { Html, Head, Main, NextScript } from "next/document"
 import classNames from "@utils/classNames"
-import { bluredBackground } from "@utils/styles"
+import { bluredBackground, navigationBarHeight, horizontalPadding } from "@utils/styles"
 
 export default class Document extends NextDocument {
   render(): JSX.Element {
-    const sideMargins = "px-4 sm:px-6 xl:px-8"
     return (
       <Html lang="en" className="bg-gray-50">
         <Head>
@@ -12,8 +11,13 @@ export default class Document extends NextDocument {
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <body className="max-w-7xl mx-auto">
-          <header className={classNames("sticky top-0 z-30 h-[69px]", bluredBackground)}>
-            <div className={classNames("flex items-center justify-between py-5 border-b border-gray-200", sideMargins)}>
+          <header className={classNames("sticky top-0 z-30", bluredBackground, horizontalPadding)}>
+            <div
+              className={classNames(
+                "flex items-center justify-between py-5 border-b border-gray-200",
+                navigationBarHeight
+              )}
+            >
               <a className="text-gray-900 text-lg font-semibold" href="/">
                 Raycast Marketplace
               </a>
@@ -25,7 +29,7 @@ export default class Document extends NextDocument {
               </a>
             </div>
           </header>
-          <div className={sideMargins}>
+          <div className={horizontalPadding}>
             <Main />
             <NextScript />
           </div>
