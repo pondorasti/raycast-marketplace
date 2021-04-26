@@ -1,7 +1,9 @@
 import NextDocument, { Html, Head, Main, NextScript } from "next/document"
+import classNames from "../utils/classNames"
 
 export default class Document extends NextDocument {
   render(): JSX.Element {
+    const sideMargins = "px-4 sm:px-6 xl:px-8"
     return (
       <Html lang="en" className="bg-gray-50">
         <Head>
@@ -9,10 +11,10 @@ export default class Document extends NextDocument {
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <body className="max-w-7xl mx-auto">
-          <header className="sticky top-0 z-30 mx-auto bg-opacity-50 h-[72px] bg-gray-50 backdrop-filter backdrop-blur max-w-8xl xl:px-8 firefox:bg-opacity-90">
-            <div className="flex items-center justify-between py-5 px-4 sm:px-6 xl:px-8 border-b border-gray-800">
+          <header className="sticky top-0 z-30 bg-opacity-50 h-[72px] bg-gray-50 backdrop-filter backdrop-blur firefox:bg-opacity-90">
+            <div className={classNames("flex items-center justify-between py-5 border-b border-gray-200", sideMargins)}>
               <a className="block" href="/react">
-                hello
+                Raycast Marketplace
               </a>
               <a className="text-gray-400 hover:text-white" href="https://github.com/tailwindlabs/headlessui">
                 <span className="sr-only">GitHub repository</span>
@@ -22,7 +24,7 @@ export default class Document extends NextDocument {
               </a>
             </div>
           </header>
-          <div className="px-4 sm:px-6 xl:px-8">
+          <div className={sideMargins}>
             <Main />
             <NextScript />
           </div>

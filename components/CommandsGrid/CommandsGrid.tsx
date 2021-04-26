@@ -3,13 +3,10 @@ import { SearchIcon } from "@heroicons/react/solid"
 import debounce from "lodash.debounce"
 import CommandsGroup from "./types"
 import { Command, CommandCard } from "../CommandCard"
+import classNames from "../../utils/classNames"
 
 interface ICommandsGrid {
   commandsGroups: CommandsGroup[]
-}
-
-function classNames(...classes: string[]): string {
-  return classes.filter(Boolean).join(" ")
 }
 
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
