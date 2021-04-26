@@ -98,31 +98,26 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
     <div className="flex">
       {/* Sidebar */}
       <div
-        className={classNames("flex flex-shrink-0 sticky mr-7", navigationBarOffset)}
+        className={classNames("flex flex-col flex-shrink-0 sticky mr-7 w-48 h-screen", navigationBarOffset)}
         style={{ height: "fit-content" }}
       >
-        <div className="flex flex-col w-48">
-          <div className="flex-1 flex-col">
-            <form
-              className="relative rounded-md shadow-sm my-2"
-              ref={searchInputRef}
-              onSubmit={(event) => event.preventDefault()}
-            >
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </div>
-              <input
-                type="search"
-                className="focus:ring-ray focus:border-ray focus:ring-opacity-50 focus:ring-2 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-                placeholder="Search"
-                onChange={handleSearchQuery}
-              />
-            </form>
-            {/* <p className="p-2 opacity-25">{numb} Results</p> */}
-            <h3 className="p-2 mt-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">Categories</h3>
-            <nav className="flex-1 space-y-1">{tabsHTML}</nav>
+        <form
+          className="relative rounded-md shadow-sm my-2 px-1"
+          ref={searchInputRef}
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
           </div>
-        </div>
+          <input
+            type="search"
+            className="focus:ring-ray focus:border-ray focus:ring-opacity-50 focus:ring-2 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+            placeholder="Search"
+            onChange={handleSearchQuery}
+          />
+        </form>
+        <h3 className="p-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Categories</h3>
+        <nav className="flex-1 space-y-1">{tabsHTML}</nav>
       </div>
 
       {/* Grid */}
