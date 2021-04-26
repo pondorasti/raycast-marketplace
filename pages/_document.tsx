@@ -1,5 +1,5 @@
 import NextDocument, { Html, Head, Main, NextScript } from "next/document"
-import classNames from "../utils/classNames"
+import classNames from "@utils/classNames"
 
 export default class Document extends NextDocument {
   render(): JSX.Element {
