@@ -54,7 +54,7 @@ export default function HeroSection(): JSX.Element {
             <span
               className="block text-ray"
               style={{
-                textShadow: "0 0 8px #000, #FF6363 0 0 20px ",
+                textShadow: "0 0 8px #000, #FF6363 0 0 24px ",
               }}
             >
               Unofficial Marketplace

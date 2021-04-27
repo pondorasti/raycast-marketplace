@@ -110,7 +110,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
           </div>
           <input
             type="search"
-            className="focus:ring-ray focus:border-ray focus:ring-opacity-50 focus:ring-2 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+            className="bg-white focus:ring-ray focus:border-ray focus:ring-opacity-50 focus:ring-2 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
             placeholder="Search"
             onChange={handleSearchQuery}
           />
