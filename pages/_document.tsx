@@ -1,16 +1,19 @@
 import NextDocument, { Html, Head, Main, NextScript } from "next/document"
+import nightwind from "nightwind/helper"
 import classNames from "@utils/classNames"
 import { bluredBackground, navigationBarHeight, horizontalPadding } from "@utils/styles"
 
 export default class Document extends NextDocument {
   render(): JSX.Element {
     return (
-      <Html lang="en" className="bg-gray-50 dark:bg-darkGray-600">
+      <Html lang="en">
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          {/* eslint-disable-next-line react/no-danger */}
+          <script dangerouslySetInnerHTML={{ __html: nightwind.init() }} />
         </Head>
-        <body className="max-w-7xl mx-auto">
+        <body className="max-w-7xl mx-auto bg-gray-50 dark:bg-darkGray-600">
           <header className={classNames("sticky top-0 z-30", bluredBackground, horizontalPadding)}>
             <div
               className={classNames(
@@ -18,7 +21,7 @@ export default class Document extends NextDocument {
                 navigationBarHeight
               )}
             >
-              <a className="text-gray-900 dark:text-white dark:text-opacity-95 text-lg font-semibold" href="/">
+              <a className="text-gray-900 text-lg font-semibold" href="/">
                 Raycast Marketplace
               </a>
               <a className="text-gray-400 hover:text-white" href="https://github.com/tailwindlabs/headlessui">
