@@ -74,7 +74,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
               isSubGroupPrime ? "text-2xl" : "text-3xl",
               bluredBackground,
               navigationBarOffset,
-              "-mx-5.5 px-5.5 font-bold tracking-tight py-3 z-10 sticky dark:text-white dark:text-opacity-95"
+              "-mx-5.5 px-5.5 font-bold tracking-tight py-3 z-10 sticky text-gray-900"
             )}
           >
             {group.name}

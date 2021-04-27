@@ -59,7 +59,7 @@ export default function HeroSection(): JSX.Element {
             >
               Unofficial Marketplace
             </span>{" "}
-            <span className="block xl:inline dark:text-white dark:text-opacity-95">for Raycast Script Commands</span>
+            <span className="block xl:inline">for Raycast Script Commands</span>
           </h1>
         </div>
       </div>

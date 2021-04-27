@@ -69,15 +69,12 @@ function CommandCard({
     >
       <div className="flex items-center">
         {iconElement()}
-        <p className="ml-2 text-xl font-semibold text-gray-900 dark:text-white dark:text-opacity-95">{title}</p>
+        <p className="ml-2 text-xl font-semibold text-gray-900">{title}</p>
       </div>
 
       {/* eslint-disable-next-line react/no-danger */}
-      <div
-        className="my-2 text-base text-gray-500 dark:text-white dark:text-opacity-60 prose"
-        dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-      />
-      <p className="mt-auto text-sm text-gray-500 dark:text-white dark:text-opacity-60">
+      <div className="my-2 text-base text-gray-500 prose" dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
+      <p className="mt-auto text-sm text-gray-500">
         {isTemplate ? "Template • " : ""}
         {hasArguments ? "Arguments • " : ""}
         {capitalize(language)}
