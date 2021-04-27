@@ -36,9 +36,8 @@ export default function NavigationBar(): JSX.Element {
             xmlns="http://www.w3.org/2000/svg"
             className="mr-2"
           >
-            <title>Artboard</title>
-            <g id="Random" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-              <g id="Artboard" transform="translate(-1104.000000, -1317.000000)" fill="#FF6363">
+            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+              <g transform="translate(-1104.000000, -1317.000000)" fill="#FF6363">
                 <path
                   d="M1106.522,1335.319 L1111.536,1340.333 L1108.15169,1340.33309 L1106.522,1335.319 Z M1104.001,1327.556 L1116.778,1340.333 L1114.071,1340.333 L1105.303,1331.564 L1104.001,1327.556 Z M1105.86,1324.174 L1122.02,1340.333 L1119.314,1340.333 L1104.293,1325.312 L1105.86,1324.174 Z M1115.73307,1317 L1128,1325.91245 L1123.619,1339.396 L1107.329,1323.106 L1115.73307,1317 Z"
                   id="Combined-Shape"
