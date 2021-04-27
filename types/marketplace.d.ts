@@ -24,4 +24,9 @@ type Command = {
   filename: string
 }
 
-export default Command
+interface CommandsGroup {
+  name: string
+  path: string
+  scriptCommands: Command[]
+  subGroups?: CommandsGroup[]
+}
