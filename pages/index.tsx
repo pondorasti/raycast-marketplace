@@ -3,8 +3,8 @@ import Head from "next/head"
 import remark from "remark"
 import remarkHtml from "remark-html"
 import remarkExternalLinks from "remark-external-links"
+import HeroSection from "@components/HeroSection"
 import { CommandsGrid, CommandsGroup } from "../components/CommandsGrid"
-import HeroSection from "../components/HeroSection/HeroSection"
 
 export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   return (
