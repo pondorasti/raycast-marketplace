@@ -1,6 +1,5 @@
 import React from "react"
 import Image from "next/image"
-import Command from "./types"
 
 function CommandCard({
   title,

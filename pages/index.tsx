@@ -4,7 +4,7 @@ import remark from "remark"
 import remarkHtml from "remark-html"
 import remarkExternalLinks from "remark-external-links"
 import HeroSection from "@components/HeroSection"
-import { CommandsGrid, CommandsGroup } from "../components/CommandsGrid"
+import CommandsGrid from "@components/CommandsGrid"
 
 export default function Home({ commandsGroups }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   return (
