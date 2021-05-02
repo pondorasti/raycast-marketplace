@@ -43,5 +43,10 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms"), require("nightwind")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/forms"),
+    require("nightwind"),
+    require("@tailwindcss/line-clamp"),
+  ],
 }
