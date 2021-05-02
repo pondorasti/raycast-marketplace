@@ -1,5 +1,6 @@
 import React from "react"
 import Image from "next/image"
+import { useTheme } from "next-themes"
 
 function CommandCard({
   title,
@@ -12,20 +13,27 @@ function CommandCard({
   path,
   filename,
 }: Command): JSX.Element {
+  const { resolvedTheme } = useTheme()
   // Source: https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
   const capitalize = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
 
   const iconElement = () => {
+    const defaultIcon = "👋"
     const pTag = (emoji: string) => <p className="text-xl font-semibold">{emoji}</p>
 
     // Undefined Icon
-    if (icon === undefined) return pTag("👋")
+    if (icon === undefined) return pTag(defaultIcon)
 
     // prioritize light over dark
-    const iconString = icon.light || icon.dark
+    let iconString: string | undefined
+    if (resolvedTheme === "dark") {
+      iconString = icon.dark || icon.light
+    } else {
+      iconString = icon.light || icon.dark
+    }
 
     // Empty Icon String
-    if (iconString === undefined) return pTag("👋")
+    if (iconString === undefined) return pTag(defaultIcon)
     // Github Image
     if (iconString?.includes("images") && !iconString?.includes("http")) {
       const githubPath = `https://raw.githubusercontent.com/raycast/script-commands/master/commands/${path}${iconString}`
