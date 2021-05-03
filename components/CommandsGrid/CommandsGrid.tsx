@@ -28,8 +28,8 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
       href={`#${name}`}
       className={classNames(
         // false ? "bg-gray-100 text-gray-900" :
-        "text-gray-600 hover:bg-gray-200 hover:text-gray-900",
-        "flex p-2 text-sm font-medium rounded-md"
+        "text-gray-600 hover:bg-gray-200 dark:hover:bg-darkGray-800 hover:text-gray-900",
+        "flex p-2 text-sm rounded-md"
       )}
       onClick={() => {
         searchInputRef.current?.reset()
