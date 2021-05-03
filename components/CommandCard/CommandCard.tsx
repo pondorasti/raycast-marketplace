@@ -19,7 +19,8 @@ function CommandCard({
 
   const iconElement = () => {
     const defaultIcon = "👋"
-    const pTag = (emoji: string) => <p className="text-xl font-semibold">{emoji}</p>
+    const iconSize = "24px"
+    const pTag = (emoji: string) => <p className="text-xl font-semibold text-center h-6 w-6">{emoji}</p>
 
     // Undefined Icon
     if (icon === undefined) return pTag(defaultIcon)
@@ -37,10 +38,10 @@ function CommandCard({
     // Github Image
     if (iconString?.includes("images") && !iconString?.includes("http")) {
       const githubPath = `https://raw.githubusercontent.com/raycast/script-commands/master/commands/${path}${iconString}`
-      return <Image src={githubPath} alt="" width="24px" height="24px" />
+      return <Image src={githubPath} alt="" width={iconSize} height={iconSize} />
     }
     // External URL Image
-    if (iconString?.includes("http")) return <img src={iconString} alt="" width="24px" height="24px" />
+    if (iconString?.includes("http")) return <img src={iconString} alt="" width={iconSize} height={iconSize} />
     // Emoji
     return pTag(iconString)
   }
@@ -72,16 +73,19 @@ function CommandCard({
       href={`https://github.com/raycast/script-commands/blob/master/commands/${path}${filename}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex flex-col bg-white dark:bg-darkGray-500 p-4 shadow-lg rounded-lg"
+      className="h-34 flex flex-col bg-white dark:bg-darkGray-500 p-4 shadow-lg rounded-lg"
     >
       <div className="flex items-center">
         {iconElement()}
-        <p className="ml-2 text-xl font-semibold text-gray-900">{title}</p>
+        <p className="ml-2 text-base font-semibold line-clamp-1 text-gray-900">{title}</p>
       </div>
 
-      {/* eslint-disable-next-line react/no-danger */}
-      <div className="my-2 text-base text-gray-500 prose" dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
-      <p className="mt-auto text-sm text-gray-500">
+      <div
+        className="mt-2 text-sm line-clamp-2 text-gray-500 prose"
+        /* eslint-disable-next-line react/no-danger */
+        dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+      />
+      <p className="mt-auto text-sm line-clamp-1 text-gray-500">
         {isTemplate ? "Template • " : ""}
         {hasArguments ? "Arguments • " : ""}
         {capitalize(language)}
