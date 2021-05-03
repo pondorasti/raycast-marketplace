@@ -81,7 +81,7 @@ function CommandCard({
       </div>
 
       <div
-        className="mt-2 text-sm line-clamp-2 text-gray-500 prose"
+        className="mt-2 text-sm line-clamp-2 text-gray-500 dark:text-gray-400 prose"
         /* eslint-disable-next-line react/no-danger */
         dangerouslySetInnerHTML={{ __html: descriptionHtml }}
       />
