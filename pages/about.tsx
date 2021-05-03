@@ -3,7 +3,7 @@ import Head from "next/head"
 import remark from "remark"
 import remarkHtml from "remark-html"
 import remarkExternalLinks from "remark-external-links"
-import gfm from "remark-gfm"
+import remarkGfm from "remark-gfm"
 
 export default function Home({ markdown }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   return (
@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps = async () => {
     await remark()
       .use(remarkExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] })
       .use(remarkHtml)
-      .use(gfm)
+      .use(remarkGfm)
       .process(data)
   ).toString()
 
