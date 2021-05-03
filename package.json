@@ -27,6 +27,7 @@
     "react-toggle-dark-mode": "^1.0.4",
     "remark": "^13.0.0",
     "remark-external-links": "^8.0.0",
+    "remark-gfm": "^1.0.0",
     "remark-html": "^13.0.1",
     "tailwindcss": "^2.1.1"
   },
