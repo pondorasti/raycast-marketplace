@@ -19,8 +19,8 @@ function CommandCard({
 
   const iconElement = () => {
     const defaultIcon = "👋"
-    const iconSize = "24px"
-    const pTag = (emoji: string) => <p className="text-xl font-semibold text-center h-6 w-6">{emoji}</p>
+    const iconSize = "24px" // ⬇️ If changed, update height, width and line-height for `pTag`
+    const pTag = (emoji: string) => <p className="text-2xl font-semibold text-center h-6 w-6 leading-6">{emoji}</p>
 
     // Undefined Icon
     if (icon === undefined) return pTag(defaultIcon)
