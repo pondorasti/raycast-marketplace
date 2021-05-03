@@ -9,6 +9,8 @@ type Icon = {
 }
 
 type Command = {
+  identifier: string
+
   title: string
   description?: string
   descriptionHtml: string
