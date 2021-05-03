@@ -20,6 +20,7 @@ module.exports = {
         darkGray: {
           500: "#101111",
           600: "#000000",
+          800: "#171717",
         },
       },
       typography: (theme) => ({

@@ -23,7 +23,7 @@ export default function NavigationBar(): JSX.Element {
     <header className={classNames("sticky top-0 z-30", bluredBackground, horizontalPadding)}>
       <div
         className={classNames(
-          "flex items-center justify-between py-5 border-b border-gray-200 dark:border-gray-800",
+          "flex items-center justify-between py-5 border-b border-opacity-75 border-gray-200 dark:border-darkGray-800",
           navigationBarHeight
         )}
       >
