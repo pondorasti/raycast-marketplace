@@ -54,17 +54,19 @@ export default function HeroSection(): JSX.Element {
 
       <div className="relative my-16 mx-auto max-w-7xl px-4 sm:my-24 z-10">
         <div className="text-center">
-          <h1 className="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl">
-            <span
-              className="block text-ray"
-              style={{
-                textShadow: `0 0 8px ${resolvedTheme === "dark" ? "#000" : "#fff"} , #FF6363 0 0 24px`,
-              }}
-            >
-              Unofficial Marketplace
-            </span>{" "}
-            <span className="block xl:inline">for Raycast Script Commands</span>
-          </h1>
+          {resolvedTheme !== undefined && (
+            <h1 className="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl">
+              <span
+                className="block text-ray"
+                style={{
+                  textShadow: `0 0 8px ${resolvedTheme === "dark" ? "#000" : "#fff"} , #FF6363 0 0 24px`,
+                }}
+              >
+                Unofficial Marketplace
+              </span>{" "}
+              <span className="block xl:inline">for Raycast Script Commands</span>
+            </h1>
+          )}
         </div>
       </div>
     </div>
