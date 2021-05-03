@@ -13,6 +13,7 @@ module.exports = {
       spacing: {
         5.5: "1.375rem",
         15: "3.75rem",
+        34: "8.5rem",
       },
       colors: {
         ray: "#FF6363",

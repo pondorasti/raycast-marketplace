@@ -70,10 +70,10 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
         <div key={group.name} id={group.name}>
           <p
             className={classNames(
-              isSubGroupPrime ? "text-2xl" : "text-3xl",
+              isSubGroupPrime ? "text-xl" : "text-2xl",
               bluredBackground,
               navigationBarOffset,
-              "-mx-5.5 px-5.5 font-bold tracking-tight py-3 z-10 sticky text-gray-900"
+              "-mx-5.5 px-5.5 font-semibold tracking-tight py-3 z-10 sticky text-gray-900"
             )}
           >
             {group.name}
