@@ -64,7 +64,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
 
       const cards = filteredScriptCommands.map((command: Command) => {
         // eslint-disable-next-line react/jsx-props-no-spreading
-        return <CommandCard key={command.title + command.filename} {...command} />
+        return <CommandCard key={command.identifier} {...command} />
       })
 
       // Compute section height
