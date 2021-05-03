@@ -1,4 +1,8 @@
+import { useTheme } from "next-themes"
+
 export default function HeroSection(): JSX.Element {
+  const { resolvedTheme } = useTheme()
+
   return (
     <div className="relative overflow-hidden">
       <div className="hidden sm:block sm:absolute sm:inset-y-0 sm:h-full sm:w-full" aria-hidden="true">
@@ -54,7 +58,7 @@ export default function HeroSection(): JSX.Element {
             <span
               className="block text-ray"
               style={{
-                textShadow: "0 0 8px #000, #FF6363 0 0 24px ",
+                textShadow: `0 0 8px ${resolvedTheme === "dark" ? "#000" : "#fff"} , #FF6363 0 0 24px`,
               }}
             >
               Unofficial Marketplace

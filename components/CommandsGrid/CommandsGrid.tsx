@@ -5,7 +5,6 @@ import CommandCard from "@components/CommandCard"
 import classNames from "@utils/classNames"
 import { bluredBackground, navigationBarOffset } from "@utils/styles"
 import { InView } from "react-intersection-observer"
-import CSS from "csstype"
 
 interface ICommandsGrid {
   commandsGroups: CommandsGroup[]
@@ -74,15 +73,15 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
       const gridGap = 16 * (numberOfRows - 1)
       const accumulatedCardsHeight = 136 * numberOfRows
       const gridBottomPadding = 20
-      const heightStyle: CSS.Properties = {
-        height: `${headerHeight + (cards.length !== 0 ? accumulatedCardsHeight + gridGap + gridBottomPadding : 0)}px`,
-      }
+      const height = `${
+        headerHeight + (cards.length !== 0 ? accumulatedCardsHeight + gridGap + gridBottomPadding : 0)
+      }px`
 
       // ‼️ DO NOT CHANGE component styling without updating the computed properties from above ^^^
       return (
         <InView>
           {({ inView, ref }) => (
-            <div key={group.name} id={group.name} ref={ref} style={heightStyle}>
+            <div key={group.name} id={group.name} ref={ref} style={{ height }}>
               {inView && (
                 <>
                   <p
