@@ -23,7 +23,7 @@ export default function Home({ markdown }: InferGetStaticPropsType<typeof getSta
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const api = "https://raw.githubusercontent.com/raycast/script-commands/master/README.md"
+  const api = "https://raw.githubusercontent.com/raycast/script-commands/master/CONTRIBUTING.md"
   const result = await fetch(api)
   const data = await result.text()
 
