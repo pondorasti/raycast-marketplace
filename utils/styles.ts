@@ -5,3 +5,4 @@ export const bluredBackground =
 
 export const navigationBarHeight = "h-[69px]"
 export const navigationBarOffset = "top-[69px]"
+export const navigationBarLinkStyling = "text-sm font-medium text-black opacity-70 hover:opacity-100"
