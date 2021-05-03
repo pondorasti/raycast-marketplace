@@ -4,6 +4,8 @@ import debounce from "lodash.debounce"
 import CommandCard from "@components/CommandCard"
 import classNames from "@utils/classNames"
 import { bluredBackground, navigationBarOffset } from "@utils/styles"
+import { InView } from "react-intersection-observer"
+import CSS from "csstype"
 
 interface ICommandsGrid {
   commandsGroups: CommandsGroup[]
@@ -66,20 +68,39 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
         return <CommandCard key={command.title + command.filename} {...command} />
       })
 
+      // Compute section height
+      const numberOfRows = Math.ceil(cards.length / 2)
+      const headerHeight = isSubGroupPrime ? 52 : 56
+      const gridGap = 16 * (numberOfRows - 1)
+      const accumulatedCardsHeight = 136 * numberOfRows
+      const gridBottomPadding = 20
+      const heightStyle: CSS.Properties = {
+        height: `${headerHeight + (cards.length !== 0 ? accumulatedCardsHeight + gridGap + gridBottomPadding : 0)}px`,
+      }
+
+      // ‼️ DO NOT CHANGE component styling without updating the computed properties from above ^^^
       return (
-        <div key={group.name} id={group.name}>
-          <p
-            className={classNames(
-              isSubGroupPrime ? "text-xl" : "text-2xl",
-              bluredBackground,
-              navigationBarOffset,
-              "-mx-5.5 px-5.5 font-semibold tracking-tight py-3 z-10 sticky text-gray-900"
-            )}
-          >
-            {group.name}
-          </p>
-          {cards.length !== 0 && <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-5">{cards}</div>}
-        </div>
+        <InView>
+          {({ inView, ref }) => (
+            <div key={group.name} id={group.name} ref={ref} style={heightStyle}>
+              {inView && (
+                <>
+                  <p
+                    className={classNames(
+                      isSubGroupPrime ? "text-xl" : "text-2xl",
+                      bluredBackground,
+                      navigationBarOffset,
+                      "-mx-5.5 px-5.5 font-semibold tracking-tight py-3 z-10 sticky text-gray-900"
+                    )}
+                  >
+                    {group.name}
+                  </p>
+                  {cards.length !== 0 && <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-5">{cards}</div>}
+                </>
+              )}
+            </div>
+          )}
+        </InView>
       )
     }
 
