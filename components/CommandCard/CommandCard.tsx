@@ -23,7 +23,7 @@ function CommandCard({
     const pTag = (emoji: string) => <p className="text-2xl font-semibold text-center h-6 w-6 leading-6">{emoji}</p>
 
     // Undefined Icon
-    if (icon === undefined) return pTag(defaultIcon)
+    if (icon === null) return pTag(defaultIcon)
 
     // prioritize light over dark
     let iconString: string | undefined
