@@ -14,7 +14,7 @@ export default function Home({ markdown }: InferGetStaticPropsType<typeof getSta
       </Head>
       <main>
         <div
-          className="mx-auto my-24 prose"
+          className="mx-auto my-24 prose prose-sm sm:prose lg:prose-lg"
           /* eslint-disable-next-line react/no-danger */
           dangerouslySetInnerHTML={{ __html: markdown }}
         />
