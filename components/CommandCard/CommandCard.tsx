@@ -40,7 +40,8 @@ function CommandCard({
       const githubPath = `https://raw.githubusercontent.com/raycast/script-commands/master/commands/${path}${iconString}`
       return <Image src={githubPath} alt="" width={iconSize} height={iconSize} />
     }
-    // External URL Image
+    // External URL Image (can't use Next.js Image)
+    // eslint-disable-next-line @next/next/no-img-element
     if (iconString?.includes("http")) return <img src={iconString} alt="" width={iconSize} height={iconSize} />
     // Emoji
     return pTag(iconString)

@@ -1,6 +1,7 @@
 {
   "extends": [
     "airbnb-typescript",
+    "next",
 
     "plugin:@typescript-eslint/recommended",
 
