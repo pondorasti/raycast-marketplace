@@ -10,7 +10,11 @@ export default class Document extends NextDocument {
           <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
 
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body className="max-w-7xl mx-auto bg-gray-50 dark:bg-darkGray-600">
           <Main />
