@@ -12,9 +12,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   // Source: https://vercel.com/guides/deploying-nextjs-using-fathom-analytics-with-vercel
   const router = useRouter()
   useEffect(() => {
-    // Initialize Fathom when the app loads
     Fathom.load("MGCVJOTW", {
-      includedDomains: ["raycast-marketplace.vercel.app"],
+      includedDomains: ["scriptcommands.com"],
     })
 
     function onRouteChangeComplete() {
@@ -23,7 +22,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     // Record a pageview when route changes
     router.events.on("routeChangeComplete", onRouteChangeComplete)
 
-    // Unassign event listener
     return () => {
       router.events.off("routeChangeComplete", onRouteChangeComplete)
     }
