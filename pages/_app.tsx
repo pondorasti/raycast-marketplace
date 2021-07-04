@@ -7,7 +7,7 @@ import { ThemeProvider } from "next-themes"
 import { horizontalPadding } from "@utils/styles"
 import NavigationBar from "@components/NavigationBar"
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   // Fathom
   // Source: https://vercel.com/guides/deploying-nextjs-using-fathom-analytics-with-vercel
   const router = useRouter()
@@ -37,5 +37,3 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     </ThemeProvider>
   )
 }
-
-export default MyApp
