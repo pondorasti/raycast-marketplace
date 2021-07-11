@@ -3,7 +3,6 @@ import { SearchIcon } from "@heroicons/react/solid"
 import debounce from "lodash.debounce"
 import CommandCard from "@components/CommandCard"
 import classNames from "@utils/classNames"
-import { bluredBackground, navigationBarOffset } from "@utils/styles"
 import { InView } from "react-intersection-observer"
 
 interface ICommandsGrid {
@@ -87,9 +86,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
                   <p
                     className={classNames(
                       isSubGroupPrime ? "text-xl" : "text-2xl",
-                      bluredBackground,
-                      navigationBarOffset,
-                      "-mx-5.5 px-5.5 font-semibold tracking-tight py-3 z-10 sticky text-gray-900"
+                      "-mx-5.5 px-5.5 font-semibold tracking-tight py-3 z-10 sticky text-gray-900 bg-blur top-navbar"
                     )}
                   >
                     {group.name}
@@ -117,7 +114,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
     <div className="flex">
       {/* Sidebar */}
       <div
-        className={classNames("flex flex-col flex-shrink-0 sticky mr-7 w-48 h-screen", navigationBarOffset)}
+        className="flex flex-col flex-shrink-0 sticky mr-7 w-48 h-screen top-navbar"
         style={{ height: "fit-content" }}
       >
         <form
