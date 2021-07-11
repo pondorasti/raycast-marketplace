@@ -1,4 +1,5 @@
-import { useState, useCallback, ChangeEvent, useRef } from "react"
+import { useState, useCallback, ChangeEvent, useRef, useEffect } from "react"
+import { useRouter } from "next/router"
 import { SearchIcon } from "@heroicons/react/solid"
 import debounce from "lodash.debounce"
 import CommandCard from "@components/CommandCard"
@@ -10,16 +11,34 @@ interface ICommandsGrid {
 }
 
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
-  const searchInputRef = useRef<HTMLFormElement>(null)
+  const router = useRouter()
+  const formRef = useRef<HTMLFormElement>(null)
+  const searchInputRef = useRef<HTMLInputElement>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const debouncedSearch = useCallback(
-    debounce((newValue: string) => setSearchQuery(newValue), 200),
+    debounce((newValue: string) => {
+      setSearchQuery(newValue)
+      router.push(`?search=${newValue}`, undefined, { shallow: true })
+    }, 200),
     []
   )
   const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     debouncedSearch(event.target.value.toLowerCase())
   }
+
+  useEffect(() => {
+    const { search } = router.query
+    console.log(search)
+    if (search !== undefined) {
+      console.log("updating")
+      const searchInput = searchInputRef.current
+      if (searchInput) {
+        searchInput.value = String(search)
+      }
+      setSearchQuery(String(search))
+    }
+  }, [])
 
   // Sidebar
   const tabsHTML = commandsGroups.map(({ name }) => (
@@ -32,7 +51,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
         "flex p-2 text-sm rounded-md"
       )}
       onClick={() => {
-        searchInputRef.current?.reset()
+        formRef.current?.reset()
         setSearchQuery("")
       }}
     >
@@ -119,7 +138,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
       >
         <form
           className="relative rounded-md shadow-sm my-2 mx-1"
-          ref={searchInputRef}
+          ref={formRef}
           onSubmit={(event) => event.preventDefault()}
         >
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -129,6 +148,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
             type="search"
             className="bg-white focus:ring-ray focus:border-ray focus:ring-opacity-50 focus:ring-2 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
             placeholder="Search"
+            ref={searchInputRef}
             onChange={handleSearchQuery}
           />
         </form>
