@@ -1,7 +1,5 @@
 import Link from "next/link"
 import dynamic from "next/dynamic"
-import classNames from "@utils/classNames"
-import { bluredBackground, navigationBarHeight, horizontalPadding, navigationBarLinkStyling } from "@utils/styles"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import { DarkModeSwitch } from "react-toggle-dark-mode"
@@ -31,13 +29,8 @@ export default function NavigationBar(): JSX.Element {
   }
 
   return (
-    <header className={classNames("sticky top-0 z-30", bluredBackground, horizontalPadding)}>
-      <div
-        className={classNames(
-          "flex items-center justify-between py-5 border-b border-opacity-75 border-gray-200 dark:border-darkGray-800",
-          navigationBarHeight
-        )}
-      >
+    <header className="sticky top-0 z-30 bg-blur px-body">
+      <div className="flex items-center justify-between py-5 border-b border-opacity-75 border-gray-200 dark:border-darkGray-800 h-navbar">
         <Link href="/">
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a className="text-gray-900 text-md font-normal flex items-center">
@@ -65,23 +58,23 @@ export default function NavigationBar(): JSX.Element {
         <div className="flex items-center space-x-3">
           <Link href="/about">
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a className={navigationBarLinkStyling}>About</a>
+            <a className="navbar-link">About</a>
           </Link>
 
           <Link href="/contribute">
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a className={navigationBarLinkStyling}>Contribute</a>
+            <a className="navbar-link">Contribute</a>
           </Link>
 
           <DynamicDarkModeSwitch
-            className={navigationBarLinkStyling}
+            className="navbar-link"
             checked={resolvedTheme === "dark"}
             onChange={handleDarkModeSwitch}
             size={20}
           />
 
           <a
-            className={navigationBarLinkStyling}
+            className="navbar-link"
             target="_blank"
             rel="noopener noreferrer"
             href="https://github.com/raycast/script-commands"
