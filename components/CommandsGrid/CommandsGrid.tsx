@@ -12,13 +12,22 @@ interface ICommandsGrid {
 
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
   const router = useRouter()
+
   const formRef = useRef<HTMLFormElement>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const [searchQuery, setSearchQuery] = useState("")
+
+  // Search Logic
   const debouncedSearch = useCallback(
     debounce((newValue: string) => {
       setSearchQuery(newValue)
-      router.push(`?search=${newValue}`, undefined, { shallow: true })
+      let newQuery: string
+      if (!newValue || newValue.length === 0) {
+        newQuery = ""
+      } else {
+        newQuery = `?search=${newValue}`
+      }
+      router.push(newQuery, undefined, { shallow: true })
     }, 200),
     []
   )
@@ -27,18 +36,19 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
     debouncedSearch(event.target.value.toLowerCase())
   }
 
+  // Router Logic - Initial Load
+  const { search } = router.query
+  const [hasMounted, setHasMounted] = useState(false)
   useEffect(() => {
-    const { search } = router.query
-    console.log(search)
-    if (search !== undefined) {
-      console.log("updating")
+    if (router.isReady && !hasMounted && search !== undefined) {
       const searchInput = searchInputRef.current
       if (searchInput) {
         searchInput.value = String(search)
+        setSearchQuery(String(search))
+        setHasMounted(true)
       }
-      setSearchQuery(String(search))
     }
-  }, [])
+  }, [search])
 
   // Sidebar
   const tabsHTML = commandsGroups.map(({ name }) => (
