@@ -5,48 +5,56 @@ import debounce from "lodash.debounce"
 import CommandCard from "@components/CommandCard"
 import classNames from "@utils/classNames"
 import { InView } from "react-intersection-observer"
+import { useHotkeys } from "react-hotkeys-hook"
 
 interface ICommandsGrid {
   commandsGroups: CommandsGroup[]
 }
 
 export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Element {
+  // Config
   const router = useRouter()
-
   const formRef = useRef<HTMLFormElement>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const [searchQuery, setSearchQuery] = useState("")
+  useHotkeys("⌘+k, ctrl+k, /", (event) => {
+    event.preventDefault()
+    searchInputRef.current?.focus()
+  })
 
-  // Search Logic
+  // Debounced Search - Shallow URL Update
   const debouncedSearch = useCallback(
     debounce((newValue: string) => {
-      setSearchQuery(newValue)
       let newQuery: string
       if (!newValue || newValue.length === 0) {
         newQuery = ""
       } else {
         newQuery = `?search=${newValue}`
       }
+
       router.push(newQuery, undefined, { shallow: true })
     }, 200),
     []
   )
-  const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault()
-    debouncedSearch(event.target.value.toLowerCase())
-  }
 
-  // Router Logic - Initial Load
+  // Update <input> based on Router (URL query)
   const { search } = router.query
-  const [hasMounted, setHasMounted] = useState(false)
   useEffect(() => {
-    if (router.isReady && !hasMounted && search !== undefined) {
-      const searchInput = searchInputRef.current
-      if (searchInput) {
-        searchInput.value = String(search)
-        setSearchQuery(String(search))
-        setHasMounted(true)
-      }
+    if (!router.isReady) {
+      return // exit early if it's rendering on the server
+    }
+
+    const searchInput = searchInputRef.current
+    if (!searchInput) {
+      return // exit early if searchInputRef is null
+    }
+
+    if (search !== undefined) {
+      searchInput.value = String(search)
+      setSearchQuery(String(search))
+    } else {
+      searchInput.value = ""
+      setSearchQuery("")
     }
   }, [search])
 
@@ -74,13 +82,16 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
     // Inner factory for building the Grid of Cards
     function commandsFactory(group: CommandsGroup, isSubGroupPrime = false): JSX.Element {
       const filteredScriptCommands = group.scriptCommands.filter((command) => {
-        const filteredAuthors = command.authors?.filter((author) => author.name.toLowerCase().includes(searchQuery))
+        const lowerSearchQuery = searchQuery.toLowerCase()
+        const filteredAuthors = command.authors?.filter((author) =>
+          author.name.toLowerCase().includes(lowerSearchQuery)
+        )
         return (
-          command.title.toLowerCase().includes(searchQuery) ||
-          command.description?.toLowerCase().includes(searchQuery) ||
-          command.language.toLowerCase().includes(searchQuery) ||
-          (command.isTemplate && "template".includes(searchQuery)) ||
-          (command.hasArguments && "arguments".includes(searchQuery)) ||
+          command.title.toLowerCase().includes(lowerSearchQuery) ||
+          command.description?.toLowerCase().includes(lowerSearchQuery) ||
+          command.language.toLowerCase().includes(lowerSearchQuery) ||
+          (command.isTemplate && "template".includes(lowerSearchQuery)) ||
+          (command.hasArguments && "arguments".includes(lowerSearchQuery)) ||
           (filteredAuthors !== undefined && filteredAuthors.length !== 0)
         )
       })
@@ -155,12 +166,19 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
             <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
           </div>
           <input
-            type="search"
-            className="bg-white focus:ring-ray focus:border-ray focus:ring-opacity-50 focus:ring-2 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+            type="text"
+            className={classNames(
+              "bg-white text-gray-900 block w-full pl-10 text-sm border-gray-300 rounded-md",
+              "focus:ring-ray focus:border-ray focus:ring-opacity-50 focus:ring-2", // focus utilties
+              "pr-0 md:pr-12" // kbd logic
+            )}
             placeholder="Search"
             ref={searchInputRef}
-            onChange={handleSearchQuery}
+            onChange={(event) => debouncedSearch(event.target.value)}
           />
+          <div className="hidden md:flex absolute inset-y-0 right-0 py-1.5 pr-1.5 pointer-events-none">
+            <kbd>/</kbd>
+          </div>
         </form>
         <h3 className="p-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Categories</h3>
         <nav className="flex-1 space-y-1">{tabsHTML}</nav>
