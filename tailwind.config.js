@@ -81,7 +81,7 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("nightwind"),
     require("@tailwindcss/line-clamp"),
-    plugin(function({ addUtilities }) {
+    plugin(function ({ addUtilities }) {
       addUtilities({
         ".h-navbar": {
           height: "69px",
@@ -90,7 +90,7 @@ module.exports = {
           top: "69px",
         },
         ".navbar-link": {
-          "@apply text-sm font-medium text-black opacity-70 hover:opacity-100": {}
+          "@apply text-sm font-medium text-black opacity-70 hover:opacity-100": {},
         },
         ".bg-blur": {
           "@apply bg-opacity-50 bg-gray-50 dark:bg-darkGray-600 dark:bg-opacity-50 backdrop-filter backdrop-blur": {},
@@ -98,7 +98,11 @@ module.exports = {
         ".px-body": {
           "@apply px-4 sm:px-6 xl:px-8": {},
         },
+        kbd: {
+          "@apply inline-flex items-center border border-gray-200 rounded px-2 text-sm font-sans font-medium text-gray-400":
+            {},
+        },
       })
-    })
+    }),
   ],
 }
