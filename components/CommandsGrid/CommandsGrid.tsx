@@ -177,7 +177,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
             onChange={(event) => debouncedSearch(event.target.value)}
           />
           <div className="hidden md:flex absolute inset-y-0 right-0 py-1.5 pr-1.5 pointer-events-none">
-            <kbd>/</kbd>
+            <kbd>⌘K</kbd>
           </div>
         </form>
         <h3 className="p-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Categories</h3>
