@@ -25,8 +25,18 @@ export const getStaticProps: GetStaticProps = async () => {
   const result = await fetch(api)
   const data = await result.json()
   const commandsGroups: CommandsGroup[] = data.groups
-  commandsGroups.sort((a, b) => (a.name > b.name ? 1 : -1))
+  // Data Sanitizing
+  function sortCommandsGroup(groups: CommandsGroup[]) {
+    groups.sort((a, b) => (a.name > b.name ? 1 : -1))
+    groups.forEach((group) => {
+      if (group.subGroups) {
+        sortCommandsGroup(group.subGroups)
+      }
+    })
+  }
+  sortCommandsGroup(commandsGroups)
 
+  // Markdown Processing
   function remarkCommands(groups: CommandsGroup[]) {
     groups.forEach(async (group) => {
       group.scriptCommands.forEach(async (script) => {
