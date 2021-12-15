@@ -6,6 +6,7 @@ import { DarkModeSwitch } from "react-toggle-dark-mode"
 import classNames from "@utils/classNames"
 
 const iconSize = "w-5 h-5"
+const darkModeSwitchSize = 20
 
 // Source: https://github.com/vercel/next.js/issues/4515#issuecomment-810635574
 const DynamicDarkModeSwitch = dynamic(
@@ -13,7 +14,7 @@ const DynamicDarkModeSwitch = dynamic(
     const promise = import("react-toggle-dark-mode").then((module) => module.DarkModeSwitch)
     return promise
   },
-  { ssr: false, loading: () => <DarkModeSwitch checked={false} size={20} onChange={() => undefined} /> }
+  { ssr: false, loading: () => <DarkModeSwitch checked={false} size={darkModeSwitchSize} onChange={() => undefined} /> }
 )
 
 export default function NavigationBar(): JSX.Element {

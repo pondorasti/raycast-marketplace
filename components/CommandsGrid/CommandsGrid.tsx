@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent, useRef, useEffect } from "react"
+import { useState, useCallback, useRef, useEffect } from "react"
 import { useRouter } from "next/router"
 import { SearchIcon } from "@heroicons/react/solid"
 import debounce from "lodash.debounce"
@@ -78,6 +78,16 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
   ))
 
   // Grid
+  function flattenCommandsGroups(rootGroups?: CommandsGroup[]): CommandsGroup[] {
+    let result: CommandsGroup[] = []
+    rootGroups?.forEach((group) => {
+      result.push(group)
+      result = result.concat(flattenCommandsGroups(group.subGroups))
+    })
+
+    return result
+  }
+  const flattenedCommandsGroup = flattenCommandsGroups(commandsGroups)
   function groupsFactory(groups: CommandsGroup[], isSubGroup = false): JSX.Element[] {
     // Inner factory for building the Grid of Cards
     function commandsFactory(group: CommandsGroup, isSubGroupPrime = false): JSX.Element {
@@ -118,9 +128,9 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
 
       // ‼️ DO NOT CHANGE component styling without updating the computed properties from above ^^^
       return (
-        <InView>
+        <InView key={group.name}>
           {({ inView, ref }) => (
-            <div key={group.name} id={group.name} ref={ref} style={{ height }}>
+            <div id={group.name} ref={ref} style={{ height }}>
               {inView && (
                 <>
                   <p
@@ -131,7 +141,7 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
                   >
                     {group.name}
                   </p>
-                  {cards.length !== 0 && <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-5">{cards}</div>}
+                  {/* {cards.length !== 0 && <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-5">{cards}</div>} */}
                 </>
               )}
             </div>
@@ -140,14 +150,9 @@ export default function CommandsGrid({ commandsGroups }: ICommandsGrid): JSX.Ele
       )
     }
 
-    return groups.map((group: CommandsGroup) => {
-      return (
-        <>
-          {commandsFactory(group, isSubGroup)}
-          {group.subGroups && groupsFactory(group.subGroups, true)}
-        </>
-      )
-    })
+    return flattenedCommandsGroup.map((group: CommandsGroup) => commandsFactory(group, isSubGroup))
+    // {/* {group.subGroups && group.subGroups.map((subGroup: CommandsGroup) => commandsFactory(subGroup, true))} */}
+    // {/* {group.subGroups && groupsFactory(group.subGroups, true)} */}
   }
 
   return (
