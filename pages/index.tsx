@@ -51,5 +51,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { commandsGroups },
+    revalidate: 10,
   }
 }
