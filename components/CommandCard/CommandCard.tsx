@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "next/image"
 import { useTheme } from "next-themes"
 
 function CommandCard({
@@ -38,7 +37,8 @@ function CommandCard({
     // Github Image
     if (iconString?.includes("images") && !iconString?.includes("http")) {
       const githubPath = `https://raw.githubusercontent.com/raycast/script-commands/master/commands/${path}${iconString}`
-      return <Image src={githubPath} alt="" width={iconSize} height={iconSize} />
+      // eslint-disable-next-line @next/next/no-img-element
+      return <img src={githubPath} alt="" width={iconSize} height={iconSize} />
     }
     // External URL Image (can't use Next.js Image)
     // eslint-disable-next-line @next/next/no-img-element
