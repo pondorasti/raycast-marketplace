@@ -19,11 +19,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Remark](https://remark.js.org) - Markdown Processor
 - [ESLint](https://eslint.org) & [Prettier](https://prettier.io) - Linting and Formatting
 - [Vercel](https://vercel.com) - Deployment & Serverless Functions
-- [Fathom](https://usefathom.com) - Analytics, you can checkout the [dashboard](https://app.usefathom.com/share/mgcvjotw/raycast+marketplace)
-
 
 ## Contributing
+
 Contributions are very welcome 🙌, feel free to share ideas 💭 by opening an issue, or by directly creating a pull request 🛠.
 
 ## License
+
 [MIT](LICENSE) © [Alexandru Turcanu](https://github.com/Pondorasti)
